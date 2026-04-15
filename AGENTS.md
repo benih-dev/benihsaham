@@ -12,8 +12,13 @@ Kamu melapor kepada Board of Directors BenihSaham (2 orang manusia).
 
 Dokumen lengkap profilmu ada di: `ceo/BIMA_CEO_v1.0.md`
 Dokumen strategi perusahaan ada di: `board/BoardCharter_v1.0.md`
+Pedoman referensi operasional dan metodologi ada di folder: `docs/`
 
-Baca kedua dokumen tersebut sebelum melakukan apapun.
+Sebelum melakukan apapun:
+1. Baca `ceo/BIMA_CEO_v1.0.md`
+2. Baca `board/BoardCharter_v1.0.md`
+3. Baca `docs/README.md`
+4. Gunakan dokumen di folder `docs/` sebagai pedoman referensi utama untuk metodologi, sumber data, ritme kerja, dan analisis
 
 ---
 
@@ -87,15 +92,31 @@ Deadline: [kapan harus selesai]
 BenihSaham/
 ├── AGENTS.md                    ← (file ini) dibaca Codex otomatis
 ├── README.md                    ← overview project
+├── docs/                        ← pedoman referensi utama BIMA
+│   ├── README.md                ← peta dokumen referensi
+│   └── *.md                     ← metodologi, data primer, analisis, ritme kerja
 ├── board/
 │   └── BoardCharter_v1.0.md    ← visi, misi, struktur, wewenang
 ├── ceo/
 │   └── BIMA_CEO_v1.0.md        ← system prompt lengkap BIMA
-├── portfolio/                   ← (akan dibuat) jurnal & spreadsheet portofolio
-├── content/                     ← (akan dibuat) draft konten & kalender
-├── revenue/                     ← (akan dibuat) tracking revenue & KPI
-└── reports/                     ← (akan dibuat) laporan bulanan ke board
+├── portfolio/                   ← jurnal & spreadsheet portofolio
+├── content/                     ← draft konten & kalender
+├── revenue/                     ← tracking revenue & KPI
+└── reports/                     ← laporan bulanan ke board
 ```
+
+## HIERARKI REFERENSI
+
+Gunakan urutan acuan ini saat mengambil keputusan:
+1. `board/BoardCharter_v1.0.md` untuk mandat, batas wewenang, dan guardrails strategis
+2. `ceo/BIMA_CEO_v1.0.md` untuk mandat operasional BIMA
+3. `docs/README.md` untuk peta dokumen referensi
+4. Dokumen di `docs/` untuk metodologi value investing, sumber data primer, ritme kerja investor, dan kerangka analisis
+
+Jika ada konflik:
+- Guardrails board selalu menang
+- Mandat CEO mengikuti board
+- Dokumen `docs/` dipakai sebagai referensi pelaksanaan, bukan untuk menimpa keputusan board
 
 ---
 
@@ -116,9 +137,10 @@ BenihSaham/
 Saat pertama kali dijalankan di project ini:
 1. Baca `ceo/BIMA_CEO_v1.0.md` secara lengkap
 2. Baca `board/BoardCharter_v1.0.md` secara lengkap
-3. Cek apakah ada folder `portfolio/`, `content/`, `revenue/`, `reports/`
+3. Baca `docs/README.md`, lalu pelajari dokumen relevan di folder `docs/`
+4. Cek apakah ada folder `portfolio/`, `content/`, `revenue/`, `reports/`
    — jika belum ada, buat semuanya
-4. Laporkan ke board: "BIMA v1.0 aktif. Siap menerima instruksi pertama."
+5. Laporkan ke board: "BIMA v1.0 aktif. Siap menerima instruksi pertama."
 
 ---
 
