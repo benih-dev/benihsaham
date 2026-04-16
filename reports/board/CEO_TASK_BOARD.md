@@ -2,7 +2,7 @@
 
 Board ini adalah kanban operasional BIMA agar board bisa memonitor apa yang sedang dikerjakan CEO tanpa harus menunggu laporan bulanan.
 
-Last updated: 2026-04-16
+Last updated: 2026-04-16 (2nd update)
 Owner: BIMA
 Review cadence: diperbarui minimal setiap Senin dan setiap kali ada item pindah status penting.
 
@@ -23,18 +23,18 @@ Review cadence: diperbarui minimal setiap Senin dan setiap kali ada item pindah 
 ## Backlog
 
 - Bangun universe awal saham IDX untuk screening kuartalan pertama.
-- Tentukan lead magnet awal untuk pertumbuhan newsletter.
-- Susun outline produk edukasi entry-level.
-- Siapkan format laporan kuartalan publik pertama.
 - Definisikan dashboard KPI bulanan dengan data aktual pertama.
+- Setup landing page newsletter di Substack/benihsaham.com.
+- Riset data aktual real-time untuk valuation (update BBCA, BBRI, ASII).
+- Produksi video "Kenapa BenihSaham memulai dengan portofolio riil".
 
 ## This Week
 
-- Review dan finalisasi artikel "Value investing itu seperti membeli warung bagus di harga diskon".
-- Produksi video "Kenapa BenihSaham memulai dengan portofolio riil".
-- Setup landing page newsletter di Substack/benihsaham.com.
-- Riset data aktual untuk valuation (cek harga pasar terbaru, PBV, ROE real-time).
-- Persiapkan konten minggu kedua: "Cara cepat membaca PBV, ROE, Future Value".
+- Finalisasi dan review artikel #001 dan #002 sebelum publikasi.
+- Update valuation file dengan data real-time (tunggu akses market data).
+- Buat infografis tabel referensi PBV/ROE untuk artikel #002.
+- Review outline produk edukasi dengan board (butuh approval).
+- Setup project tracking untuk video production pertama.
 
 ## In Progress
 
@@ -58,6 +58,9 @@ Review cadence: diperbarui minimal setiap Senin dan setiap kali ada item pindah 
 - Buat draft skrip video pertama: "Kenapa portofolio riil".
 - Tetapkan CTA newsletter dan funnel entry strategy di Q2.
 - Buat draft newsletter #001 untuk onboarding subscriber awal.
+- Buat draft artikel #002: "Cara cepat membaca PBV, ROE, Future Value".
+- Buat outline produk edukasi entry-level (8 modul).
+- Buat template laporan kuartalan publik v2.0 (comprehensive).
 
 ## Rules of Movement
 
