@@ -4,7 +4,7 @@ Kalender ini mencakup periode aktivasi April sampai Juni 2026.
 
 | Minggu | Konten Evergreen | Konten Process Log | Channel utama | Status |
 |--------|------------------|--------------------|---------------|--------|
-| 14 Apr 2026 | Value investing itu seperti membeli warung bagus di harga diskon | Kenapa BenihSaham memulai dengan portofolio riil | Web + YouTube | Planned |
+| 14 Apr 2026 | Value investing itu seperti membeli warung bagus di harga diskon | Kenapa BenihSaham memulai dengan portofolio riil | Web + YouTube | Drafting |
 | 21 Apr 2026 | Cara cepat membaca PBV, ROE, dan Future Value | Jurnal screening awal universe IDX | Web + Substack | Planned |
 | 28 Apr 2026 | Margin of safety tanpa jargon ribet | Apa yang dicatat sebelum beli saham pertama | YouTube + Substack | Planned |
 | 5 Mei 2026 | Bedanya investor dan trader dalam bahasa sederhana | Review watchlist minggu pertama Mei | Web + YouTube | Planned |

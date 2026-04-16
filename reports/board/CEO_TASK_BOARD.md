@@ -2,7 +2,7 @@
 
 Board ini adalah kanban operasional BIMA agar board bisa memonitor apa yang sedang dikerjakan CEO tanpa harus menunggu laporan bulanan.
 
-Last updated: 2026-04-13
+Last updated: 2026-04-16
 Owner: BIMA
 Review cadence: diperbarui minimal setiap Senin dan setiap kali ada item pindah status penting.
 
@@ -30,11 +30,11 @@ Review cadence: diperbarui minimal setiap Senin dan setiap kali ada item pindah 
 
 ## This Week
 
-- Isi `portfolio/watchlist.md` dengan daftar awal saham yang dipantau.
-- Lengkapi tiga template valuasi pertama untuk kandidat emiten awal.
-- Tulis daily market check pertama di `portfolio/daily/`.
-- Ubah dua slot awal di kalender Q2 menjadi draft nyata: satu artikel dan satu skrip video.
-- Tetapkan CTA newsletter pertama dan titik masuk funnel pada konten awal.
+- Review dan finalisasi artikel "Value investing itu seperti membeli warung bagus di harga diskon".
+- Produksi video "Kenapa BenihSaham memulai dengan portofolio riil".
+- Setup landing page newsletter di Substack/benihsaham.com.
+- Riset data aktual untuk valuation (cek harga pasar terbaru, PBV, ROE real-time).
+- Persiapkan konten minggu kedua: "Cara cepat membaca PBV, ROE, Future Value".
 
 ## In Progress
 
@@ -51,6 +51,13 @@ Review cadence: diperbarui minimal setiap Senin dan setiap kali ada item pindah 
 - Buat operating system tahun pertama.
 - Buat template kerja inti untuk portfolio, content, revenue, dan reports.
 - Buat laporan aktivasi awal ke board.
+- Isi `portfolio/watchlist.md` dengan 15 saham awal (10 blue chip, 5 mid-cap).
+- Buat tiga file valuasi: BBCA, BBRI, ASII dengan placeholder data.
+- Tulis daily market check pertama: `2026-04-16-daily-check.md`.
+- Buat draft artikel pertama: "Value investing warung diskon".
+- Buat draft skrip video pertama: "Kenapa portofolio riil".
+- Tetapkan CTA newsletter dan funnel entry strategy di Q2.
+- Buat draft newsletter #001 untuk onboarding subscriber awal.
 
 ## Rules of Movement
 
