@@ -7,7 +7,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -15,13 +15,13 @@ datasource db {
 // ENUMS
 // =============================================================================
 
-enum TransactionType {
+enum BsTransactionType {
   buy
   sell
   dividend
 }
 
-enum RecommendationType {
+enum BsRecommendationType {
   buy
   hold
   wait
@@ -29,58 +29,58 @@ enum RecommendationType {
   sell
 }
 
-enum RatingType {
+enum BsRatingType {
   poor
   fair
   good
   excellent
 }
 
-enum WatchlistStatus {
+enum BsWatchlistStatus {
   watch
   deep_dive
   ready
   reject
 }
 
-enum PriorityType {
+enum BsPriorityType {
   low
   medium
   high
 }
 
-enum ActionType {
+enum BsActionType {
   buy
   sell
   hold
   skip
 }
 
-enum ContentType {
+enum BsContentType {
   article
   video
   newsletter
 }
 
-enum ContentStatus {
+enum BsContentStatus {
   draft
   review
   published
   archived
 }
 
-enum PortfolioStatus {
+enum BsPortfolioStatus {
   active
   closed
   archived
 }
 
-enum DividendType {
+enum BsDividendType {
   cash
   stock
 }
 
-enum SubscriptionType {
+enum BsSubscriptionType {
   free
   premium
 }
@@ -90,248 +90,248 @@ enum SubscriptionType {
 // =============================================================================
 
 /// User accounts for authentication and portfolio ownership
-model User {
-  id                String            @id @default(uuid())
-  email             String            @unique
+model BsUser {
+  id                String                @id @default(uuid())
+  email             String                @unique
   name              String
   password          String?
-  subscriptionType  SubscriptionType  @default(free)
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
+  subscriptionType  BsSubscriptionType    @default(free)
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
 
   // Relations
-  portfolios        Portfolio[]
-  watchlistItems    WatchlistItem[]
+  portfolios        BsPortfolio[]
+  watchlistItems    BsWatchlistItem[]
 
-  @@map("users")
+  @@map("bs_users")
 }
 
 /// IDX-listed stock
-model Stock {
-  id                String       @id @default(uuid())
-  code              String(4)    @unique
+model BsStock {
+  id                String           @id @default(uuid())
+  code              String           @unique
   name              String
   sector            String?
   industry          String?
   marketCap         BigInt?
   listedDate        DateTime?
-  isIndexMember     Boolean      @default(false)
-  ipoPrice          Decimal?     @db.Decimal(10, 2)
-  parValue          Decimal      @default(100) @db.Decimal(10, 2)
+  isIndexMember     Boolean          @default(false)
+  ipoPrice          Decimal?         
+  parValue          Decimal          @default(100) 
   sharesOutstanding BigInt?
-  createdAt         DateTime     @default(now())
-  updatedAt         DateTime     @updatedAt
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
 
   // Relations
-  holdings          Holding[]
-  transactions      Transaction[]
-  valuations        Valuation[]
-  priceHistory      PriceHistory[]
-  dividends         Dividend[]
-  watchlistItems    WatchlistItem[]
-  decisionLogs      DecisionLog[]
-  contentDrafts     ContentDraft[]
+  holdings          BsHolding[]
+  transactions      BsTransaction[]
+  valuations        BsValuation[]
+  priceHistory      BsPriceHistory[]
+  dividends         BsDividend[]
+  watchlistItems    BsWatchlistItem[]
+  decisionLogs      BsDecisionLog[]
+  contentDrafts     BsContentDraft[]
 
   @@index([code])
   @@index([sector])
   @@index([isIndexMember])
-  @@map("stocks")
+  @@map("bs_stocks")
 }
 
 /// User portfolio containing holdings
-model Portfolio {
-  id                String          @id @default(uuid())
+model BsPortfolio {
+  id                String             @id @default(uuid())
   userId            String
   name              String
   description       String?
-  initialCapital    Decimal         @db.Decimal(15, 2)
-  currentValue      Decimal         @default(0) @db.Decimal(15, 2)
-  totalReturn       Decimal         @default(0) @db.Decimal(10, 2)
-  totalReturnPct    Decimal         @default(0) @db.Decimal(6, 2)
-  status            PortfolioStatus @default(active)
-  createdAt         DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
+  initialCapital    Decimal            
+  currentValue      Decimal            @default(0) 
+  totalReturn       Decimal            @default(0) 
+  totalReturnPct    Decimal            @default(0) 
+  status            BsPortfolioStatus  @default(active)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
 
   // Relations
-  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  holdings          Holding[]
-  transactions      Transaction[]
-  decisionLogs      DecisionLog[]
+  user              BsUser             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  holdings          BsHolding[]
+  transactions      BsTransaction[]
+  decisionLogs      BsDecisionLog[]
 
   @@index([userId])
   @@index([status])
-  @@map("portfolios")
+  @@map("bs_portfolios")
 }
 
 /// Current position in a stock within a portfolio
-model Holding {
+model BsHolding {
   id                String       @id @default(uuid())
   portfolioId       String
   stockId           String
   shares            Int
-  avgCost           Decimal      @db.Decimal(12, 2)
-  currentPrice      Decimal?     @db.Decimal(12, 2)
-  marketValue       Decimal?     @db.Decimal(15, 2)
-  unrealizedPnl     Decimal?     @db.Decimal(15, 2)
-  unrealizedPnlPct  Decimal?     @db.Decimal(6, 2)
-  dividendReceived  Decimal      @default(0) @db.Decimal(15, 2)
+  avgCost           Decimal      
+  currentPrice      Decimal?     
+  marketValue       Decimal?     
+  unrealizedPnl     Decimal?     
+  unrealizedPnlPct  Decimal?     
+  dividendReceived  Decimal      @default(0) 
   firstBoughtAt     DateTime
   lastUpdatedAt     DateTime?
   createdAt         DateTime     @default(now())
   updatedAt         DateTime     @updatedAt
 
   // Relations
-  portfolio         Portfolio    @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
-  stock             Stock        @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  portfolio         BsPortfolio  @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  stock             BsStock      @relation(fields: [stockId], references: [id], onDelete: Cascade)
 
   @@unique([portfolioId, stockId])
   @@index([portfolioId])
   @@index([stockId])
-  @@map("holdings")
+  @@map("bs_holdings")
 }
 
 /// Buy/sell transaction records
-model Transaction {
-  id                String         @id @default(uuid())
+model BsTransaction {
+  id                String             @id @default(uuid())
   portfolioId       String
   stockId           String
-  type              TransactionType
+  type              BsTransactionType
   shares            Int
-  price             Decimal        @db.Decimal(12, 2)
-  grossAmount       Decimal?       @db.Decimal(15, 2)
-  feeBrokerage      Decimal?       @db.Decimal(15, 2)
-  feeLevy           Decimal?       @db.Decimal(15, 2)
-  feeVat            Decimal?       @db.Decimal(15, 2)
-  netAmount         Decimal?       @db.Decimal(15, 2)
+  price             Decimal            
+  grossAmount       Decimal?           
+  feeBrokerage      Decimal?           
+  feeLevy           Decimal?           
+  feeVat            Decimal?           
+  netAmount         Decimal?           
   settlementDate    DateTime
   transactionAt     DateTime
   notes             String?
   decisionLogId     String?
-  createdAt         DateTime       @default(now())
+  createdAt         DateTime           @default(now())
 
   // Relations
-  portfolio         Portfolio      @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
-  stock             Stock          @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  portfolio         BsPortfolio        @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  stock             BsStock            @relation(fields: [stockId], references: [id], onDelete: Cascade)
 
   @@index([portfolioId])
   @@index([stockId])
   @@index([transactionAt])
   @@index([settlementDate])
-  @@map("transactions")
+  @@map("bs_transactions")
 }
 
 /// Valuation analysis following Teguh Hidayat's methodology
-model Valuation {
-  id                    String              @id @default(uuid())
+model BsValuation {
+  id                    String                @id @default(uuid())
   stockId               String
   asOfDate              DateTime
-  price                 Decimal             @db.Decimal(12, 2)
-  pbv                   Decimal?            @db.Decimal(6, 2)
-  roe                   Decimal?            @db.Decimal(6, 4)
-  bvps                  Decimal?            @db.Decimal(12, 2)
-  fv5yr                 Decimal?            @db.Decimal(12, 2)
-  fairValueMin          Decimal?            @db.Decimal(12, 2)
-  fairValueMax          Decimal?            @db.Decimal(12, 2)
-  marginOfSafetyPct     Decimal?            @db.Decimal(6, 2)
-  fundamentalRating     RatingType?
-  managementRating      RatingType?
-  recommendation        RecommendationType?
+  price                 Decimal               
+  pbv                   Decimal?              
+  roe                   Decimal?              
+  bvps                  Decimal?              
+  fv5yr                 Decimal?              
+  fairValueMin          Decimal?              
+  fairValueMax          Decimal?              
+  marginOfSafetyPct     Decimal?              
+  fundamentalRating     BsRatingType?
+  managementRating      BsRatingType?
+  recommendation        BsRecommendationType?
   thesis                String?
   risks                 String?
   catalysts             String?
   thesisBrokenTrigger   String?
-  createdBy             String              @default("BIMA")
-  createdAt             DateTime            @default(now())
-  updatedAt             DateTime            @updatedAt
+  createdBy             String                @default("BIMA")
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
 
   // Relations
-  stock                 Stock               @relation(fields: [stockId], references: [id], onDelete: Cascade)
-  decisionLogs          DecisionLog[]
+  stock                 BsStock               @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  decisionLogs          BsDecisionLog[]
 
   @@index([stockId])
   @@index([asOfDate])
   @@index([recommendation])
-  @@map("valuations")
+  @@map("bs_valuations")
 }
 
 /// Historical daily price data
-model PriceHistory {
+model BsPriceHistory {
   id                String       @id @default(uuid())
   stockId           String
   date              DateTime
-  open              Decimal?     @db.Decimal(12, 2)
-  high              Decimal?     @db.Decimal(12, 2)
-  low               Decimal?     @db.Decimal(12, 2)
-  close             Decimal      @db.Decimal(12, 2)
+  open              Decimal?     
+  high              Decimal?     
+  low               Decimal?     
+  close             Decimal      
   volume            BigInt?
-  value             Decimal?     @db.Decimal(20, 2)
+  value             Decimal?     
   createdAt         DateTime     @default(now())
 
   // Relations
-  stock             Stock        @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  stock             BsStock      @relation(fields: [stockId], references: [id], onDelete: Cascade)
 
   @@unique([stockId, date])
   @@index([stockId])
   @@index([date])
   @@index([stockId, date])
-  @@map("price_history")
+  @@map("bs_price_history")
 }
 
 /// Dividend payment history
-model Dividend {
-  id                String       @id @default(uuid())
+model BsDividend {
+  id                String         @id @default(uuid())
   stockId           String
-  type              DividendType
+  type              BsDividendType
   exDate            DateTime
   recordDate        DateTime?
   paymentDate       DateTime?
-  amountPerShare    Decimal?     @db.Decimal(10, 2)
-  stockRatio        Decimal?     @db.Decimal(6, 4)
-  yieldPct          Decimal?     @db.Decimal(6, 2)
+  amountPerShare    Decimal?       
+  stockRatio        Decimal?       
+  yieldPct          Decimal?       
   fiscalYear        Int?
-  createdAt         DateTime     @default(now())
+  createdAt         DateTime       @default(now())
 
   // Relations
-  stock             Stock        @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  stock             BsStock        @relation(fields: [stockId], references: [id], onDelete: Cascade)
 
   @@index([stockId])
   @@index([exDate])
   @@index([paymentDate])
-  @@map("dividends")
+  @@map("bs_dividends")
 }
 
 /// Stocks being monitored for potential investment
-model WatchlistItem {
-  id                String          @id @default(uuid())
+model BsWatchlistItem {
+  id                String            @id @default(uuid())
   userId            String
   stockId           String
-  status            WatchlistStatus
-  priority          PriorityType    @default(medium)
+  status            BsWatchlistStatus
+  priority          BsPriorityType    @default(medium)
   thesis            String?
   triggerBuy        String?
   triggerSell       String?
   rejectReason      String?
   notes             String?
-  addedAt           DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
+  addedAt           DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
 
   // Relations
-  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  stock             Stock           @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  user              BsUser            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stock             BsStock           @relation(fields: [stockId], references: [id], onDelete: Cascade)
 
   @@unique([userId, stockId])
   @@index([userId])
   @@index([stockId])
   @@index([status])
-  @@map("watchlist_items")
+  @@map("bs_watchlist_items")
 }
 
 /// Audit trail for investment decisions
-model DecisionLog {
+model BsDecisionLog {
   id                String       @id @default(uuid())
   portfolioId       String?
   stockId           String
-  action            ActionType
+  action            BsActionType
   decisionDate      DateTime
   rationale         String
   valuationId       String?
@@ -342,39 +342,39 @@ model DecisionLog {
   createdAt         DateTime     @default(now())
 
   // Relations
-  portfolio         Portfolio?   @relation(fields: [portfolioId], references: [id], onDelete: SetNull)
-  stock             Stock        @relation(fields: [stockId], references: [id], onDelete: Cascade)
-  valuation         Valuation?   @relation(fields: [valuationId], references: [id], onDelete: SetNull)
-  contentDrafts     ContentDraft[]
+  portfolio         BsPortfolio? @relation(fields: [portfolioId], references: [id], onDelete: SetNull)
+  stock             BsStock      @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  valuation         BsValuation? @relation(fields: [valuationId], references: [id], onDelete: SetNull)
+  contentDrafts     BsContentDraft[]
 
   @@index([portfolioId])
   @@index([stockId])
   @@index([decisionDate])
-  @@map("decision_logs")
+  @@map("bs_decision_logs")
 }
 
 /// Content drafts linked to investment analysis
-model ContentDraft {
-  id                String        @id @default(uuid())
+model BsContentDraft {
+  id                String             @id @default(uuid())
   stockId           String?
   decisionLogId     String?
-  type              ContentType
+  type              BsContentType
   title             String
   slug              String?
-  status            ContentStatus @default(draft)
+  status            BsContentStatus    @default(draft)
   educationalAngle  String?
   draftContent      String?
   publishedUrl      String?
   publishedAt       DateTime?
-  createdAt         DateTime      @default(now())
-  updatedAt         DateTime      @updatedAt
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
 
   // Relations
-  stock             Stock?        @relation(fields: [stockId], references: [id], onDelete: SetNull)
-  decisionLog       DecisionLog?  @relation(fields: [decisionLogId], references: [id], onDelete: SetNull)
+  stock             BsStock?           @relation(fields: [stockId], references: [id], onDelete: SetNull)
+  decisionLog       BsDecisionLog?     @relation(fields: [decisionLogId], references: [id], onDelete: SetNull)
 
   @@index([stockId])
   @@index([status])
   @@index([publishedAt])
-  @@map("content_drafts")
+  @@map("bs_content_drafts")
 }
