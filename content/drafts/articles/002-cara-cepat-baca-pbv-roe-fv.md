@@ -84,19 +84,17 @@ Buka dengan relate-able problem:
 **Rumus Teguh Hidayat:**
 > Future Value = Book Value × (1 + ROE)^5
 
-**Tapi kita pakai versi sederhana:**
-> Future Value 5 tahun ≈ Book Value × (ROE × 5)
+**Catatan:** Rumus ini butuh kalkulator untuk pangkat 5, tapi ini cara yang benar. Menggunakan rumus pendekatan akan memberikan hasil yang tidak akurat dan bisa menyesatkan.
 
 **Contoh praktis:**
 ```
 Book Value per saham: Rp1.000
 ROE: 18%
 
-Future Value (versi cepat) = 1.000 × (18% × 5) = 1.000 × 0.9 = Rp1.900
-Future Value (versi akurat) = 1.000 × (1.18)^5 = 1.000 × 2.29 = Rp2.290
+Future Value = 1.000 × (1 + 0.18)^5 = 1.000 × (1.18)^5 = 1.000 × 2.29 = Rp2.290
 ```
 
-Makanya versi cepat ini *underestimate*, tapi aman untuk screening cepat.
+Jadi dalam 5 tahun, buku per saham ini diproyeksikan tumbuh dari Rp1.000 menjadi Rp2.290 (asumsi ROE konsisten 18%).
 
 ### 5. Cara Pakai 3 Angka Ini — Alur Screening
 
@@ -108,8 +106,9 @@ Makanya versi cepat ini *underestimate*, tapi aman untuk screening cepat.
 - Di atas 15%? Bagus.
 - Konsisten 3-5 tahun? Lebih bagus.
 
-**Langkap 3:** Hitung Future Value kasar
-- Book Value × (ROE × 5)
+**Langkap 3:** Hitung Future Value
+- Book Value × (1 + ROE)^5
+- Butuh kalkulator untuk pangkat 5
 - Bandingkan dengan harga sekarang
 
 **Kesimpulan:**
