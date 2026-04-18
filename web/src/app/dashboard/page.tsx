@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma'
 import { PortfolioSummaryCard } from '@/components/portfolio/portfolio-summary-card'
 import { HoldingsTable } from '@/components/portfolio/holdings-table'
 import { Header } from '@/components/layout/header'
+import Link from 'next/link'
 
 function toNumber(value: { toNumber: () => number } | number): number {
   if (typeof value === 'number') return value
@@ -109,6 +110,16 @@ export default async function DashboardPage() {
 
         {/* Holdings Table */}
         <HoldingsTable holdings={portfolio.holdings} />
+
+        {/* Quick link to transactions */}
+        <div className="mt-4 text-right">
+          <Link
+            href="/transactions"
+            className="text-sm text-green-600 hover:text-green-700 font-medium"
+          >
+            Lihat riwayat transaksi →
+          </Link>
+        </div>
       </div>
     </div>
   )

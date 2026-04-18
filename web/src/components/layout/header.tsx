@@ -34,6 +34,12 @@ export function Header() {
                   Dashboard
                 </Link>
                 <Link
+                  href="/transactions"
+                  className="text-sm font-medium text-gray-700 hover:text-green-600"
+                >
+                  Transaksi
+                </Link>
+                <Link
                   href="/portfolio"
                   className="text-sm font-medium text-gray-700 hover:text-green-600"
                 >
